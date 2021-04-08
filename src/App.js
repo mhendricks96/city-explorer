@@ -18,13 +18,17 @@ class App extends React.Component {
    console.log('fetching')
  }
 
-  handleSearch = (citySubmitted) => {
+  handleSearch = async(citySubmitted) => {
     this.setState({
       haveSearched: true,
       citySubmitted: citySubmitted,
     })
     console.log(citySubmitted);
+    // API REQUEST
     this.fetchData();
+    const accesskey = 'pk.b47b970ef1ded58b7ddf2f383947df7e';
+    let cityData = await axios.get(`https://us1.locationiq.com/v1/search.php?key=${accesskey}&q=${citySubmitted}&format=json`);
+    console.log(cityData);
   }
 
   searchAgain = () => {
