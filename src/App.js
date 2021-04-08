@@ -26,7 +26,6 @@ class App extends React.Component {
   handleSearch = async (citySubmitted) => {
     // API REQUEST
     this.fetchData();
-    //const accesskey = 'pk.b47b970ef1ded58b7ddf2f383947df7e';
     let cityData = await axios.get(`https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&q=${citySubmitted}&format=json`);
     let lat = cityData.data[0].lat;
     let lon = cityData.data[0].lon;
