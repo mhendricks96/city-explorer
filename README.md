@@ -3,6 +3,8 @@
 **Author**: Michael Hendricks
 **Version**: 1.0.0 (increment the patch/fix version number if you make more commits past your first submission)
 
+
+[Here is the whiteboard that we drew](src/response-cycle.jpg)
 ## Overview
 The user can search for a city and finnd the lat and  log for that city.
 <!-- Provide a high level overview of what this application is and why you are building it, beyond the fact that it's an assignment for this class. (i.e. What's your problem domain?) -->
