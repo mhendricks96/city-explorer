@@ -1,7 +1,8 @@
 import React from 'react';
 import axios from 'axios';
-import CitySearch from './CitySearch.js'
-import Errors from './Errors.js'
+import CitySearch from './CitySearch.js';
+import CityMap from './CityMap.js';
+import Errors from './Errors.js';
 import './App.css';
 
 class App extends React.Component {
@@ -61,7 +62,8 @@ class App extends React.Component {
               <h2>{this.state.citySubmitted}</h2>
               <p>latitude: {this.state.latOfCitySubmitted}</p>
               <p>longitude: {this.state.lonOfCitySubmitted}</p>
-              <button onClick={this.searchAgain}>Explore Another City!</button>
+              
+              <CityMap searchAgain={this.searchAgain} cityDataLat={this.state.latOfCitySubmitted} cityDatalon ={this.state.lonOfCitySubmitted}/>
             </div> :
             <CitySearch handleSearch={this.handleSearch} />}
           <section>
