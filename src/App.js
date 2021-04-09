@@ -46,7 +46,7 @@ class App extends React.Component {
       console.log(cityData);
     } catch (err) {
       this.setState({ 
-        error: err.message0
+        error: err.message,
       });
     }
   }
