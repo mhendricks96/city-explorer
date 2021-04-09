@@ -45,7 +45,9 @@ class App extends React.Component {
       //console.log(displayName);
       console.log(cityData);
     } catch (err) {
-      this.setState({ error: err.message });
+      this.setState({ 
+        error: err.message,
+      });
     }
   }
 
@@ -71,7 +73,7 @@ class App extends React.Component {
             </div> :
             <CitySearch handleSearch={this.handleSearch} />}
           <section>
-            {this.state.error ? <h3>{this.state.render}</h3> : ''
+            {this.state.error ? <h3>{this.state.error}</h3> : ''
             }
           </section>
 
