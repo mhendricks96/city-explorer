@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import CitySearch from './CitySearch.js';
 import CityMap from './CityMap.js';
-import Errors from './Errors.js';
+//import Errors from './Errors.js';
 import './App.css';
 
 class App extends React.Component {
@@ -11,8 +11,8 @@ class App extends React.Component {
     this.state = {
       haveSearched: false,
       citySubmitted: '',
-      latOfCitySubmitted:'',
-      lonOfCitySubmitted:'',
+      latOfCitySubmitted: '',
+      lonOfCitySubmitted: '',
       errorCode: '',
 
     }
@@ -27,22 +27,26 @@ class App extends React.Component {
   handleSearch = async (citySubmitted) => {
     // API REQUEST
     this.fetchData();
-    let cityData = await axios.get(`https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&q=${citySubmitted}&format=json`);
-    let lat = cityData.data[0].lat;
-    let lon = cityData.data[0].lon;
-    let displayName = cityData.data[0].display_name;
-    let errorCode = cityData.status;
-    this.setState({
-      haveSearched: true,
-      citySubmitted: displayName,
-      latOfCitySubmitted: lat,
-      lonOfCitySubmitted: lon,
-      errorCode: errorCode,
-    })
-    console.log(citySubmitted);
+    try {
+      let cityData = await axios.get(`https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&q=${citySubmitted}&format=json`);
+      let lat = cityData.data[0].lat;
+      let lon = cityData.data[0].lon;
+      let displayName = cityData.data[0].display_name;
+      let errorCode = cityData.status;
+      this.setState({
+        haveSearched: true,
+        citySubmitted: displayName,
+        latOfCitySubmitted: lat,
+        lonOfCitySubmitted: lon,
+        errorCode: errorCode,
+      })
+      console.log(citySubmitted);
 
-    //console.log(displayName);
-    console.log(cityData);
+      //console.log(displayName);
+      console.log(cityData);
+    } catch (err) {
+      this.setState({ error: err.message });
+    }
   }
 
   searchAgain = () => {
@@ -62,19 +66,15 @@ class App extends React.Component {
               <h2>{this.state.citySubmitted}</h2>
               <p>latitude: {this.state.latOfCitySubmitted}</p>
               <p>longitude: {this.state.lonOfCitySubmitted}</p>
-              
-              <CityMap searchAgain={this.searchAgain} cityDataLat={this.state.latOfCitySubmitted} cityDatalon ={this.state.lonOfCitySubmitted}/>
+
+              <CityMap searchAgain={this.searchAgain} cityDataLat={this.state.latOfCitySubmitted} cityDatalon={this.state.lonOfCitySubmitted} />
             </div> :
             <CitySearch handleSearch={this.handleSearch} />}
           <section>
-            {this.state.errorCode === 200 ? '' : 
-              <div>
-              
-             <Errors errorCode={this.state.errorCode}/>
-             </div>
+            {this.state.error ? <h3>{this.state.render}</h3> : ''
             }
           </section>
-        
+
         </header>
       </div>
     );
