@@ -57,7 +57,11 @@ class App extends React.Component {
 
         let chosenCityWeather = await axios.get('http://localhost:3002/weather');
         //console.log(chosenCityWeather);
-        let firstDay = chosenCityWeather.data[0];
+        let firstDay = chosenCityWeather.data.data[0];
+        let firstDayDate = chosenCityWeather.data.data[0].datetime;
+        let firstDayDescription = chosenCityWeather.data.data[0].weather.description;
+        let firstDayHi = chosenCityWeather.data.data[0].max_temp;
+        let firstDayLow = chosenCityWeather.data.data[0].min_temp;
         //console.log(firstDay);
         
         this.setState({
@@ -66,10 +70,16 @@ class App extends React.Component {
           latOfCitySubmitted: lat,
           lonOfCitySubmitted: lon,
           errorCode: errorCode,
-          chosenCityWeather: chosenCityWeather
+          //chosenCityWeather: chosenCityWeather,
+          firstDayDescription: firstDayDescription,
+          firstDayDate: firstDayDate,
+          firstDayHi: firstDayHi,
+          firstDayLow: firstDayLow,
         })
-        console.log(citySubmitted);
+        //console.log(citySubmitted);
+        //console.log(chosenCityWeather);
         console.log(firstDay);
+        console.log(firstDayDate);
 
 
         //console.log(displayName);
@@ -113,7 +123,7 @@ class App extends React.Component {
                 <p>latitude: {this.state.latOfCitySubmitted}</p>
                 <p>longitude: {this.state.lonOfCitySubmitted}</p>
 
-                <Weather chosenCityWeather={this.chosenCityWeather} firstDay={this.state.firstDay}/>
+                <Weather chosenCityWeather={this.state.chosenCityWeather} firstDayDate={this.state.firstDayDate} firstDayDescription={this.state.firstDayDescription} firstDayLow={this.state.firstDayLow} firstDayHi={this.state.firstDayHi} />
 
                 <CityMap searchAgain={this.searchAgain} cityDataLat={this.state.latOfCitySubmitted} cityDatalon={this.state.lonOfCitySubmitted} />
 
