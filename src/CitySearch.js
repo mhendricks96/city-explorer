@@ -15,6 +15,7 @@ class CitySearch extends React.Component {
     event.preventDefault();
     
     this.props.handleSearch(this.textInput.current.value);
+    //this.props.getWeather();
     
   }
   
