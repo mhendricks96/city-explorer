@@ -28,22 +28,7 @@ class App extends React.Component {
   }
 
 
-  //handleWeather = async () => {
-    //try {
-    //  let allDaysWeather = await axios.get('http://localhost:3002/weather');
-
-      //this.setState({
-        //chosenCityWeather: chosenCityWeather,
-      //})
-    //} catch (err) {
-      //this.setState({
-        //error: err.message,
-      //});
-    //}
-    //console.log(firstDate);
-    //console.log(allDaysWeather);
-  //}
-
+  
     handleSearch = async (citySubmitted) => {
       // API REQUEST
       this.fetchData();
