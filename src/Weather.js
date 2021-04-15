@@ -20,7 +20,7 @@ class Weather extends React.Component {
       //</ListGroup>
       <div>
       <p>Current Temp: {this.props.weather.data[0].temp} degrees</p>
-      <p>Current Precipitation: {this.props.weather.data[0].precip}</p>
+      <p>Current Precipitation: </p>
       
       </div>
     )
