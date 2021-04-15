@@ -16,6 +16,7 @@ class App extends React.Component {
       latOfCitySubmitted: '',
       lonOfCitySubmitted: '',
       errorCode: '',
+      //cityWeather: {},
       
     }
   }
@@ -30,22 +31,27 @@ class App extends React.Component {
 
 
 
-  getWeather = async () => {
-    try{
+  getWeather = () => {
+  
 
-      let cityWeather = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/weather`);
-      
-      this.setState({
-        cityWeather: cityWeather.data,
-        displayResults: true,
+  axios.get(`${process.env.REACT_APP_BACKEND_URL}/weather`,
+      {params: {
+        lat: this.state.latOfCitySubmitted,
+        lon: this.state.lonOfCitySubmitted,
+      }})
+      .then(weather => {
+        console.log(weather)
+        this.setState({
+          displayResults: true,
+          weather: weather
+        })
       })
-    }catch (error){
-      this.setState({
-        error: error.message,
-      });
-    }  
+      .catch(err => {
+        console.error(err)
+      })
+}    
     //console.log(this.state);
-}
+
 
   
   handleSearch = async (citySubmitted) => {
@@ -59,8 +65,6 @@ class App extends React.Component {
         let displayName = cityData.data[0].display_name;
         let errorCode = cityData.status;
 
-        this.getWeather();
-        
         
         this.setState({
           haveSearched: true,
@@ -68,8 +72,11 @@ class App extends React.Component {
           latOfCitySubmitted: lat,
           lonOfCitySubmitted: lon,
           errorCode: errorCode,
+          //displayResults: true,
+          //cityWeather: this.weather,
           
         })
+        this.getWeather();
         
       } catch (error) {
         this.setState({
@@ -94,7 +101,7 @@ class App extends React.Component {
 
             <h1>Welcome to City Explorer!</h1>
             {this.state.displayResults &&
-            <Weather cityWeather={this.state.cityWeather} />}
+            <Weather weather={this.state.weather} />}
 
             {this.state.haveSearched ?
               <div>

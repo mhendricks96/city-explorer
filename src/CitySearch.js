@@ -16,12 +16,19 @@ class CitySearch extends React.Component {
     
     this.props.handleSearch(this.textInput.current.value);
     //this.props.getWeather();
+    //console.log(this.textInput.current.value)
     
   }
+
+  //getWeatherBit = (event) => {
+    //event.preventDefault();
+
+  //}
+
   
   render() {
     return (
-      <Form onSubmit={this.handleFormSubmission}>
+      <Form onSubmit= {this.handleFormSubmission}>
         <Form.Control size="lg" type="text" placeholder="Enter City" ref={this.textInput}/>
         <br />
         <Button variant="primary" type="submit">
