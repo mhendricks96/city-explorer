@@ -14,13 +14,15 @@ class Weather extends React.Component {
 
 
     console.log('in weatherjs', this.props.weather)
+    
     return(
       //<ListGroup>
         //{renderingWeather}
       //</ListGroup>
       <div>
-      <p>Current Temp: {this.props.weather.data[0].temp} degrees</p>
-      <p>Current Precipitation: </p>
+      <p>Todays date: {this.props.weather.data[0].date}</p>
+      <p>Todays Weather: {this.props.weather.data[0].description}</p>
+      
       
       </div>
     )
