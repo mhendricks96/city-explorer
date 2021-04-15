@@ -42,8 +42,8 @@ class App extends React.Component {
       .then(weather => {
         console.log(weather)
         this.setState({
+          weather: weather,
           displayResults: true,
-          weather: weather
         })
       })
       .catch(err => {
@@ -91,6 +91,7 @@ class App extends React.Component {
     searchAgain = () => {
       this.setState({
         haveSearched: false,
+        displayResults:false,
       })
     };
 
