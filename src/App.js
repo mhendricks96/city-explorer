@@ -5,7 +5,7 @@ import CityMap from './CityMap.js';
 //import Errors from './Errors.js';
 import './App.css';
 import Weather from './Weather.js';
-import Movies from './Movies.js;'
+import Movies from './Movies.js';
 
 class App extends React.Component {
   constructor(props) {
@@ -129,7 +129,7 @@ class App extends React.Component {
           {this.state.displayResults &&
             <div>
             <Weather weather={this.state.weather} />
-            <Movies movies={this.state.movies} />
+           <Movies movies={this.state.movies} />
             </div>}
 
           {this.state.haveSearched ?

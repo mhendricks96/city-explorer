@@ -7,13 +7,13 @@ class Movies extends React.Component {
 
   
   render(){
-
+    console.log(this.props.movies)
     return(
-     
+     //<div>movies</div>
       <div>
-      <p>movie: {this.props.movie.data[0].title}</p>
-      <p>Todays Weather: {this.props.movie.data[0].description}</p>
-      
+      <p>Best movie (somewhat) about this place: <em>{this.props.movies.data[0].title}</em></p>
+      <p>What it's about: <em>{this.props.movies.data[0].description}</em></p>
+    
       
       </div>
     )
