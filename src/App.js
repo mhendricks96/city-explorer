@@ -39,6 +39,7 @@ class App extends React.Component {
         params: {
           lat: this.state.latOfCitySubmitted,
           lon: this.state.lonOfCitySubmitted,
+          city: this.state.citySubmitted,
         }
       })
       .then(weather => {
