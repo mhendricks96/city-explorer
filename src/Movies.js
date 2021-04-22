@@ -7,7 +7,7 @@ class Movies extends React.Component {
 
   
   render(){
-    console.log(this.props.movies)
+    //console.log(this.props.movies)
     return(
      //<div>movies</div>
       <div>
