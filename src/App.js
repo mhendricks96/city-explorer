@@ -6,12 +6,14 @@ import CityMap from './CityMap.js';
 import './App.css';
 import Weather from './Weather.js';
 import Movies from './Movies.js';
+import Restaurants from './Restaurants.js'
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       haveSearched: false,
+      yelprecieved:false,
       displayResults: false,
       citySubmitted: '',
       latOfCitySubmitted: '',
@@ -43,7 +45,7 @@ class App extends React.Component {
         }
       })
       .then(weather => {
-        console.log(weather)
+        //console.log(weather)
         this.setState({
           weather: weather,
           displayResults: true,
@@ -53,8 +55,25 @@ class App extends React.Component {
         console.error(err)
       })
   }
-  //console.log(this.state);
 
+  getRestaurants = () => {
+    axios.get(`${process.env.REACT_APP_BACKEND_URL}/yelp`,
+      {
+        params: {
+          citySubmitted: this.state.citySubmitted,
+        }
+      })
+      .then(yelp => {
+        //console.log(yelp);
+        this.setState({
+          yelp: yelp,
+          yelprecieved:true,
+        })
+      })
+      .catch(err => {
+        console.error(err)
+      })
+  }
 
 
   getMovies = () => {
@@ -66,10 +85,9 @@ class App extends React.Component {
         }
       })
       .then(movies => {
-        console.log(movies)
+        //console.log(movies)
         this.setState({
           movies: movies,
-          //displayResults: true,
         })
       })
       .catch(err => {
@@ -102,6 +120,7 @@ class App extends React.Component {
 
       })
       this.getMovies();
+      this.getRestaurants();
       this.getWeather();
 
     } catch (error) {
@@ -127,11 +146,15 @@ class App extends React.Component {
         <header className="App-header">
 
           <h1>Welcome to City Explorer!</h1>
+
+
           {this.state.displayResults &&
             <div>
-            <Weather weather={this.state.weather} />
-           <Movies movies={this.state.movies} />
+              <Weather weather={this.state.weather} />
+              <Movies movies={this.state.movies} />
             </div>}
+            {this.state.yelprecieved &&
+            <Restaurants yelp={this.state.yelp} />}
 
           {this.state.haveSearched ?
             <div>
